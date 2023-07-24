@@ -18,4 +18,16 @@ app.get('/api/v1/quotes', (request, response) => {
   const quotes = app.locals.quotes;
 
   response.json({ quotes });
-})
+});
+
+app.locals.images = [
+  { id: 1, url: "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=834&q=80" },
+  { id: 2, url: "https://images.unsplash.com/photo-1515536765-9b2a70c4b333?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=872&q=80" },
+  { id: 3, url: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=830&q=80" }
+];
+
+app.get('/api/v1/images', (request, response) => {
+  const images = app.locals.images;
+
+  response.json({ images });
+});
