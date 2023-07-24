@@ -6,42 +6,19 @@
 module.exports = {
 
   development: {
-    client: 'sqlite3',
-    connection: {
-      filename: './dev.sqlite3'
-    }
-  },
-
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    client: 'pg',
+    connection: 'postgres://localhost/stretch',
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: './db/migrations' 
+      // where are we going to store our migrations
+      // make initial migration with the command: knex migrate:make initial
+    },
+    seeds: {
+      directory: './db/seeds/dev'
+      // make a seed file with: knex seed:make papers
+    },
+    useNullAsDefault: true
+    // takes any undefined keys or values and sets them to null
+  
   },
-
-  production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  }
-
 };
