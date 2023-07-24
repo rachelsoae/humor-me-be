@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Humor Me';
 
@@ -43,3 +45,20 @@ app.get('/api/v1/posters', (request, response) => {
 
   response.json({ posters });
 });
+
+app.post('/api/v1/posters', (request, response) => {
+  const id = Date.now();
+  const { quote, type, src } = request.body;
+  const newPoster = { id, quote: { text: quote, type }, src }
+
+  for (let requiredParameter of ['quote', 'type', 'src']) {
+    if (!request.body[requiredParameter]) {
+      return response.status(422).json({
+        message: `You are missing a required parameter of ${requiredParameter}`
+      });
+    }
+  }
+  
+  app.locals.posters.push(newPoster);
+  response.status(201).json(newPoster);
+})
