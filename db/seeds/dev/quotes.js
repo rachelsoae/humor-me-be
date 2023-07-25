@@ -20,7 +20,6 @@ exports.seed = async function(knex) {
   let quotePromises = quotesData.map(quote => {
     return createQuotes(knex, quote);
   })
-  console.log(quotePromises[0])
 
   return Promise.all(quotePromises)
 };
