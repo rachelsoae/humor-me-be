@@ -8,9 +8,6 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
-console.log(process.env)
-console.log(process.env.DB_USER)
-
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Humor Me';
 
