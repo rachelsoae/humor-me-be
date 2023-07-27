@@ -5,6 +5,7 @@
  */
 
 const parse = require('pg-connection-string').parse;
+const knex = require('knex');
 
 
 // Your connection string
@@ -13,7 +14,7 @@ const connectionString = 'postgres://stretch_api_user:qglo1a2QR0rHymJYVuOrNukbtP
 // Parse the connection string to get the individual connection parameters
 const dbConfig = parse(connectionString);
 
-module.exports = {
+const db = knex({
   development: {
     client: 'pg',
     connection: {
@@ -40,4 +41,6 @@ module.exports = {
     // takes any undefined keys or values and sets them to null
   
   },
-};
+});
+
+module.exports = db;
