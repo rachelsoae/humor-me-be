@@ -40,4 +40,30 @@ module.exports = {
     // takes any undefined keys or values and sets them to null
   
   },
+  production: {
+    client: 'pg',
+    connection: {
+      host: dbConfig.host,
+      database: dbConfig.database,
+      user: dbConfig.user,
+      password: dbConfig.password,
+      port: dbConfig.port,
+      ssl: {
+        rejectUnauthorized: false // Set to true to reject unauthorized connections (if necessary)
+        // Other SSL options can be added here if required by your provider
+      }
+    },
+    migrations: {
+      directory: './db/migrations' 
+      // where are we going to store our migrations
+      // make initial migration with the command: knex migrate:make initial
+    },
+    seeds: {
+      directory: './db/seeds/dev'
+      // make a seed file with: knex seed:make papers
+    },
+    useNullAsDefault: true
+    // takes any undefined keys or values and sets them to null
+  
+  },
 };
