@@ -15,7 +15,6 @@ const connectionString = 'postgres://stretch_api_user:qglo1a2QR0rHymJYVuOrNukbtP
 const dbConfig = parse(connectionString);
 
 const db = knex({
-  development: {
     client: 'pg',
     connection: {
       host: dbConfig.host,
@@ -40,7 +39,6 @@ const db = knex({
     useNullAsDefault: true
     // takes any undefined keys or values and sets them to null
   
-  },
 });
 
 module.exports = db;
