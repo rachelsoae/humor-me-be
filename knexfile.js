@@ -3,11 +3,30 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-module.exports = {
 
+const parse = require('pg-connection-string').parse;
+
+
+// Your connection string
+const connectionString = 'postgres://stretch_api_user:qglo1a2QR0rHymJYVuOrNukbtPVf5oWi@dpg-cj18kmk07spjv9r3q3b0-a.oregon-postgres.render.com/stretch_api';
+
+// Parse the connection string to get the individual connection parameters
+const dbConfig = parse(connectionString);
+
+module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://stretch_be_user:Iy0WtPs3J2sTwLNclmfBsQdWaADgkFGv@dpg-cj0s482ip7vkfo4m4a0g-a.oregon-postgres.render.com/stretch_be',
+    connection: {
+      host: dbConfig.host,
+      database: dbConfig.database,
+      user: dbConfig.user,
+      password: dbConfig.password,
+      port: dbConfig.port,
+      ssl: {
+        rejectUnauthorized: false // Set to true to reject unauthorized connections (if necessary)
+        // Other SSL options can be added here if required by your provider
+      }
+    },
     migrations: {
       directory: './db/migrations' 
       // where are we going to store our migrations
