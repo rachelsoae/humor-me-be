@@ -50,6 +50,17 @@ app.post('/api/v1/quotes', async (request, response) => {
   }
 });
 
+app.delete('/api/v1/quotes/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    
+    await database('quotes').where({ id }).del();
+    response.status(200).json({ message: 'Quote deleted successfully' });
+  } catch(error) {
+    response.status(422).json({error})
+  }
+});
+
 app.get('/api/v1/images', async (request, response) => {
   try {
     const images = await database('images').select();
