@@ -7,6 +7,7 @@ exports.up = function(knex) {
     .createTable('posters', function (table) {
       table.increments('id').primary();
       table.string('quote');
+      table.string('type');
       table.string('src');
     })
 };
