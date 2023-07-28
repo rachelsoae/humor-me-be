@@ -7,7 +7,8 @@ const postersData = require('../../../data/postersData.js')
 
 const createPosters = (knex, poster) => {
   const posterId = knex('posters').insert({
-    quote: JSON.stringify(poster.quote),
+    quote: poster.quote.text,
+    type: poster.quote.type,
     src: poster.src
   }, 'id')
   return posterId;
