@@ -41,9 +41,9 @@ app.get('/api/v1/quotes/:id', async (request, response) => {
 
 app.post('/api/v1/quotes', async (request, response) => {
   try {
-    const { quote, category } = request.body;
+    const { quote, type } = request.body;
     
-    await database('quotes').insert({ quote, category });
+    await database('quotes').insert({ quote, type });
     response.status(201).json({ message: 'Quote saved successfully' });
   } catch(error) {
     response.status(422).json({error})
