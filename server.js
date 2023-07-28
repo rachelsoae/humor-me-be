@@ -55,3 +55,15 @@ app.post('/api/v1/posters', async (request, response) => {
     response.status(422).json({error})
   }
 });
+
+app.delete('/api/v1/posters/:id', async (request, response) => {
+  try {
+    const db = knex(knexConfig.development);
+    const { id } = request.params;
+    
+    await db('posters').where({ id }).del();
+    response.status(200).json({ message: 'Poster deleted successfully' });
+  } catch(error) {
+    response.status(422).json({error})
+  }
+});
