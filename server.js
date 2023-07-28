@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const knex = require('knex');
+const knexConfig = require('./knexfile');
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
@@ -39,5 +41,17 @@ app.get('/api/v1/posters', async (request, response) => {
     response.status(200).json(posters);
   } catch(error) {
     response.status(500).json({error})
+  }
+});
+
+app.post('/api/v1/posters', async (request, response) => {
+  try {
+    const db = knex(knexConfig.development);
+    const { quote, type, src } = request.body;
+    
+    await db('posters').insert({ quote, type, src });
+    response.status(201).json({ message: 'Poster saved successfully' });
+  } catch(error) {
+    response.status(422).json({error})
   }
 });
