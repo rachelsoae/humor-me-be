@@ -136,7 +136,10 @@ app.post('/api/v1/posters', async (request, response) => {
     const { quote, type, src } = request.body;
     
     await database('posters').insert({ quote, type, src });
-    response.status(201).json({ message: 'Poster saved successfully' });
+
+    const lastRow = await database('posters').select('id').orderBy('id', 'desc').first();
+
+    response.status(201).json({ message: 'Poster saved successfully', poster: { id: lastRow.id, quote, type, src } });
   } catch(error) {
     response.status(422).json({error})
   }
