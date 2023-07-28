@@ -96,6 +96,17 @@ app.post('/api/v1/images', async (request, response) => {
   }
 });
 
+app.delete('/api/v1/images/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    
+    await database('images').where({ id }).del();
+    response.status(200).json({ message: 'Image deleted successfully' });
+  } catch(error) {
+    response.status(422).json({error})
+  }
+});
+
 app.get('/api/v1/posters', async (request, response) => {
   try {
     const posters = await database('posters').select();
