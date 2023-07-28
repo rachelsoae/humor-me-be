@@ -7,7 +7,7 @@ exports.up = function(knex) {
     .createTable('quotes', function (table) {
       table.increments('id').primary();
       table.string('quote');
-      table.string('category');
+      table.string('type');
     })
 };
 

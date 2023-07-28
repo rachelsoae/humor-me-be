@@ -41,10 +41,13 @@ app.get('/api/v1/quotes/:id', async (request, response) => {
 
 app.post('/api/v1/quotes', async (request, response) => {
   try {
-    const { quote, category } = request.body;
+    const { quote, type } = request.body;
     
-    await database('quotes').insert({ quote, category });
-    response.status(201).json({ message: 'Quote saved successfully' });
+    await database('quotes').insert({ quote, type });
+    
+    const lastRow = await database('quotes').select('id').orderBy('id', 'desc').first();
+
+    response.status(201).json({ message: 'Quote saved successfully', quote: { id: lastRow.id, quote, type } });
   } catch(error) {
     response.status(422).json({error})
   }
@@ -90,7 +93,10 @@ app.post('/api/v1/images', async (request, response) => {
     const { image_src } = request.body;
     
     await database('images').insert({ image_src });
-    response.status(201).json({ message: 'Image saved successfully' });
+    
+    const lastRow = await database('images').select('id').orderBy('id', 'desc').first();
+
+    response.status(201).json({ message: 'Image saved successfully', image: { id: lastRow.id, image_src } });
   } catch(error) {
     response.status(422).json({error})
   }
@@ -136,7 +142,10 @@ app.post('/api/v1/posters', async (request, response) => {
     const { quote, type, src } = request.body;
     
     await database('posters').insert({ quote, type, src });
-    response.status(201).json({ message: 'Poster saved successfully' });
+
+    const lastRow = await database('posters').select('id').orderBy('id', 'desc').first();
+
+    response.status(201).json({ message: 'Poster saved successfully', poster: { id: lastRow.id, quote, type, src } });
   } catch(error) {
     response.status(422).json({error})
   }
