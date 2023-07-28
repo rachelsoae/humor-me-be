@@ -72,6 +72,21 @@ app.get('/api/v1/posters', async (request, response) => {
   }
 });
 
+app.get('/api/v1/posters/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const poster = await database('posters').where({ id }).first();
+
+    if (!poster) {
+      return response.status(404).json({ error: 'Poster not found!'})
+    }
+
+    response.status(200).json(poster);
+  } catch(error) {
+    response.status(500).json({error})
+  }
+});
+
 app.post('/api/v1/posters', async (request, response) => {
   try {
     const { quote, type, src } = request.body;
