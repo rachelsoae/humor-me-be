@@ -24,6 +24,21 @@ app.get('/api/v1/quotes', async (request, response) => {
   }
 });
 
+app.get('/api/v1/quotes/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const quote = await database('quotes').where({ id }).first();
+
+    if (!quote) {
+      return response.status(404).json({ error: 'Quote not found!'})
+    }
+
+    response.status(200).json(quote);
+  } catch(error) {
+    response.status(500).json({error})
+  }
+});
+
 app.get('/api/v1/images', async (request, response) => {
   try {
     const images = await database('images').select();
