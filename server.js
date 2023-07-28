@@ -74,6 +74,17 @@ app.get('/api/v1/images/:id', async (request, response) => {
   }
 });
 
+app.post('/api/v1/images', async (request, response) => {
+  try {
+    const { image_src } = request.body;
+    
+    await database('images').insert({ image_src });
+    response.status(201).json({ message: 'Image saved successfully' });
+  } catch(error) {
+    response.status(422).json({error})
+  }
+});
+
 app.get('/api/v1/posters', async (request, response) => {
   try {
     const posters = await database('posters').select();
