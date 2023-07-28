@@ -32,3 +32,12 @@ app.get('/api/v1/images', async (request, response) => {
     response.status(500).json({error})
   }
 });
+
+app.get('/api/v1/posters', async (request, response) => {
+  try {
+    const posters = await database('posters').select();
+    response.status(200).json(posters);
+  } catch(error) {
+    response.status(500).json({error})
+  }
+});
