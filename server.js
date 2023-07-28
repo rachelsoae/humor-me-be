@@ -93,7 +93,10 @@ app.post('/api/v1/images', async (request, response) => {
     const { image_src } = request.body;
     
     await database('images').insert({ image_src });
-    response.status(201).json({ message: 'Image saved successfully' });
+    
+    const lastRow = await database('images').select('id').orderBy('id', 'desc').first();
+
+    response.status(201).json({ message: 'Image saved successfully', image: { id: lastRow.id, image_src } });
   } catch(error) {
     response.status(422).json({error})
   }
