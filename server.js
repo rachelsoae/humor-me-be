@@ -39,6 +39,17 @@ app.get('/api/v1/quotes/:id', async (request, response) => {
   }
 });
 
+app.post('/api/v1/quotes', async (request, response) => {
+  try {
+    const { quote, category } = request.body;
+    
+    await database('quotes').insert({ quote, category });
+    response.status(201).json({ message: 'Quote saved successfully' });
+  } catch(error) {
+    response.status(422).json({error})
+  }
+});
+
 app.get('/api/v1/images', async (request, response) => {
   try {
     const images = await database('images').select();
