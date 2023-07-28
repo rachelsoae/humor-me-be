@@ -8,7 +8,7 @@ const quotesData = require('../../../data/quotesData.js')
 const createQuotes = (knex, quote) => {
   const quoteId = knex('quotes').insert({
     quote: quote.quote,
-    category: quote.category
+    type: quote.type
   }, 'id')
   return quoteId;
 }
