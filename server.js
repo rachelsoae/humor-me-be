@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const knex = require('knex');
-const knexConfig = require('./knexfile');
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
@@ -46,10 +44,9 @@ app.get('/api/v1/posters', async (request, response) => {
 
 app.post('/api/v1/posters', async (request, response) => {
   try {
-    const db = knex(knexConfig.development);
     const { quote, type, src } = request.body;
     
-    await db('posters').insert({ quote, type, src });
+    await database('posters').insert({ quote, type, src });
     response.status(201).json({ message: 'Poster saved successfully' });
   } catch(error) {
     response.status(422).json({error})
@@ -58,10 +55,9 @@ app.post('/api/v1/posters', async (request, response) => {
 
 app.delete('/api/v1/posters/:id', async (request, response) => {
   try {
-    const db = knex(knexConfig.development);
     const { id } = request.params;
     
-    await db('posters').where({ id }).del();
+    await database('posters').where({ id }).del();
     response.status(200).json({ message: 'Poster deleted successfully' });
   } catch(error) {
     response.status(422).json({error})
