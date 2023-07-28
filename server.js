@@ -33,6 +33,21 @@ app.get('/api/v1/images', async (request, response) => {
   }
 });
 
+app.get('/api/v1/images/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const image = await database('images').where({ id }).first();
+
+    if (!image) {
+      return response.status(404).json({ error: 'Image not found!'})
+    }
+
+    response.status(200).json(image);
+  } catch(error) {
+    response.status(500).json({error})
+  }
+});
+
 app.get('/api/v1/posters', async (request, response) => {
   try {
     const posters = await database('posters').select();
