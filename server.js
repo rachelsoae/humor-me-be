@@ -44,7 +44,10 @@ app.post('/api/v1/quotes', async (request, response) => {
     const { quote, type } = request.body;
     
     await database('quotes').insert({ quote, type });
-    response.status(201).json({ message: 'Quote saved successfully' });
+    
+    const lastRow = await database('quotes').select('id').orderBy('id', 'desc').first();
+
+    response.status(201).json({ message: 'Quote saved successfully', quote: { id: lastRow.id, quote, type } });
   } catch(error) {
     response.status(422).json({error})
   }
