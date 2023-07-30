@@ -8,7 +8,7 @@ exports.up = function(knex) {
       table.increments('id').primary();
       table.string('quote');
       table.string('type');
-      table.string('src');
+      table.string('image');
     })
 };
 
