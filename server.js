@@ -1,3 +1,5 @@
+// server.js //
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -18,7 +20,7 @@ app.listen(app.get('port'), () => {
 app.get('/api/v1/quotes', async (request, response) => {
   try {
     const quotes = await database('quotes').select();
-    response.status(200).json({quotes});
+    response.status(200).json(quotes);
   } catch(error) {
     response.status(500).json({error})
   }
@@ -90,13 +92,13 @@ app.get('/api/v1/images/:id', async (request, response) => {
 
 app.post('/api/v1/images', async (request, response) => {
   try {
-    const { image_src } = request.body;
+    const { image } = request.body;
     
-    await database('images').insert({ image_src });
+    await database('images').insert({ image });
     
     const lastRow = await database('images').select('id').orderBy('id', 'desc').first();
 
-    response.status(201).json({ message: 'Image saved successfully', image: { id: lastRow.id, image_src } });
+    response.status(201).json({ message: 'Image saved successfully', image: { id: lastRow.id, image } });
   } catch(error) {
     response.status(422).json({error})
   }
@@ -139,13 +141,13 @@ app.get('/api/v1/posters/:id', async (request, response) => {
 
 app.post('/api/v1/posters', async (request, response) => {
   try {
-    const { quote, type, src } = request.body;
+    const { quote, type, image } = request.body;
     
-    await database('posters').insert({ quote, type, src });
+    await database('posters').insert({ quote, type, image });
 
     const lastRow = await database('posters').select('id').orderBy('id', 'desc').first();
 
-    response.status(201).json({ message: 'Poster saved successfully', poster: { id: lastRow.id, quote, type, src } });
+    response.status(201).json({ message: 'Poster saved successfully', poster: { id: lastRow.id, quote, type, image } });
   } catch(error) {
     response.status(422).json({error})
   }

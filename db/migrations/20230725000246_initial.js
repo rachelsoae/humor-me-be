@@ -7,7 +7,7 @@ exports.up = function(knex) {
   return knex.schema 
     .createTable('images', function (table) {
       table.increments('id').primary();
-      table.string('image_src');
+      table.string('image');
     })
 };
 
