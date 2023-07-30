@@ -29,6 +29,8 @@ All API endpoints (also known as "routes") are prefixed with `https://stretch-ap
 | Delete an existing image | `/images/:id` | DELETE | N/A | `{ message: 'Image deleted successfully' }` |
 | Delete an existing poster | `/posters/:id` | DELETE | N/A | `{ message: 'Poster deleted successfully' }` |
 
+* Any error responses will return an error message.
+
 ## Contributors
 - [Jamie Caudill](https://github.com/JamieCaudill)
 - [Daniel Cochico](https://github.com/dcochico)
