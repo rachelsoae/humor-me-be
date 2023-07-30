@@ -24,7 +24,7 @@ All API endpoints (also known as "routes") are prefixed with `https://stretch-ap
 | Get a single poster | `/posters/:id` | GET | N/A | Object with poster corresponding to id: `{id: 4, quote: 'example-quote', type: 'wholesome' image: 'example.com/example-image'}` |
 | Submit a new quote | `/quotes` | POST | `{ quote: <String>, type: <String> }` | `{ message: 'Quote saved successfully', quote: { id: 1, quote: 'example-quote', type: 'wholesome' } }` |
 | Submit a new image | `/images` | POST | `{ image: <String> }` | `{ message: 'Image saved successfully', image: { id: 1, image: 'example.com/example-image' } }` |
-| Submit a new poster | `/posters` | POST | `{ quote: <String>, type: <String>, imgage: <String> }` | `{ message: 'Poster saved successfully', poster: { id: 1, quote: 'example-quote', type: 'wholesome', image: 'example.com/example-image' } }` |
+| Submit a new poster | `/posters` | POST | `{ quote: <String>, type: <String>, image: <String> }` | `{ message: 'Poster saved successfully', poster: { id: 1, quote: 'example-quote', type: 'wholesome', image: 'example.com/example-image' } }` |
 | Delete an existing quote | `/quotes/:id` | DELETE | N/A | `{ message: 'Quote deleted successfully' }` |
 | Delete an existing image | `/images/:id` | DELETE | N/A | `{ message: 'Image deleted successfully' }` |
 | Delete an existing poster | `/posters/:id` | DELETE | N/A | `{ message: 'Poster deleted successfully' }` |
