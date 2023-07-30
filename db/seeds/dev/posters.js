@@ -9,7 +9,7 @@ const createPosters = (knex, poster) => {
   const posterId = knex('posters').insert({
     quote: poster.quote.text,
     type: poster.quote.type,
-    src: poster.src
+    image: poster.src
   }, 'id')
   return posterId;
 }

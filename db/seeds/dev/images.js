@@ -6,7 +6,7 @@
 const imagesData = require('../../../data/imagesData.js')
 
 const createImages = (knex, image) => {
-  const imageId = knex('images').insert({ image_src: image.image }, 'id')
+  const imageId = knex('images').insert({ image: image.image }, 'id')
   return imageId;
 }
 
