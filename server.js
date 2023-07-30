@@ -18,7 +18,7 @@ app.listen(app.get('port'), () => {
 app.get('/api/v1/quotes', async (request, response) => {
   try {
     const quotes = await database('quotes').select();
-    response.status(200).json({quotes});
+    response.status(200).json(quotes);
   } catch(error) {
     response.status(500).json({error})
   }
