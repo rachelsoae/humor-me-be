@@ -1,6 +1,6 @@
 # Humor Me API
 This repo was created to serve as the backend for the [Humor Me](https://github.com/rachelsoae/stretch-fe) project.
-The purpose of this project was to teach ourselves a brand new technology from scratch. As Front End Developers, we chose to challenge ourselves by learning to write a back end from scratch using Express.js, Knex.js, and PostgreSQL. 
+The purpose of this project was to teach ourselves a brand new technology. As Front End Developers, we chose to challenge ourselves by learning to write a back end from scratch using Express.js, Knex.js, and PostgreSQL. 
 
 ## Deployed Pages
 [Quotes](https://stretch-api.onrender.com/api/v1/quotes) | [Images](https://stretch-api.onrender.com/api/v1/images) | [Posters](https://stretch-api.onrender.com/api/v1/posters)
